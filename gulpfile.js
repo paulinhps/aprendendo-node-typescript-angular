@@ -8,11 +8,17 @@ var buffer = require('vinyl-buffer');
 
 const tsProject = ts.createProject('tsconfig.json');
 
-gulp.task("default", () => {
+gulp.task("scripts", () => {
 
     return tsProject.src()
-    .pipe(tsProject())
-    .js
-    .pipe(uglify())
-    .pipe(gulp.dest("dist"));
-})
+        .pipe(tsProject())
+        .js
+     //   .pipe(uglify())
+        .pipe(gulp.dest("dist"));
+});
+
+gulp.task('wath', () => {
+    gulp.watch('src/**/*.ts', ['scripts']);
+});
+
+gulp.task('default', ['wath'])
